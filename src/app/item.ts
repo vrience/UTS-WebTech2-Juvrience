@@ -1,4 +1,6 @@
 export interface Item {
+    _id: String;
     message:string;
-    time: number;
+    time: string;
+    status: string;
 }

@@ -1,17 +1,28 @@
-<div>
-    <form>
-        <input type="text" id="message" name="message" placeholder="type here..." [(ngModel)]="message"/>
-        <button mat-raised-button (click)="addItem()">ADD</button>
-        <!-- <button mat-raised-button (click)="openBottomSheet()">ADD</button> -->
-    </form>
-</div>
-
-<div>
-    <h3>Your To Do List</h3>
-    <div *ngFor="let item of toDoList; let i = index">
-        <span class="close" (click)="remove(i)"></span>
-        <span (click)=remove(i)>x </span>{{item.message}}
-        <span class ="time"> {{item.time | date:'HH:mm:ss'}} </span>
-        <!--to do list item here-->
-    </div>
-   
+<div class="button-holder">
+    <button mat-raised-button color="primary" routerLink="/todolist">
+      Create To Do List
+    </button>
+  </div>
+  <div class="table">
+    <table mat-table [dataSource]="items" class="mat-elevation-z8">
+      <ng-container matColumnDef="message">
+        <th mat-header-cell *matHeaderCellDef>To Do List</th>
+        <td mat-cell *matCellDef="let item">{{ item.message }}</td>
+      </ng-container>
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef>Deadline Time</th>
+        <td mat-cell *matCellDef="let item">{{ item.time }}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let item">{{ item.status }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        [routerLink]="'/item/' + row._id"
+      ></tr>
+    </table>
+  </div>
+  

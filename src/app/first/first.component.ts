@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Item } from "../item";
-import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Item } from '../item';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-first',
@@ -8,44 +8,25 @@ import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet'
   styleUrls: ['./first.component.scss']
 })
 export class FirstComponent implements OnInit {
-message: string="";
-  toDoList:Array<Item>=[];
+  items: Item[];
+  error:boolean;
+  displayedColumns: string[] = ['message', 'time', 'status'];
+                    
 
-  constructor(private _bottomSheet: MatBottomSheet) { }
+  constructor(
+    private ds: DataService,
+  ) {}
 
-  openBottomSheet(): void {
-    this._bottomSheet.open(BottomSheetOverviewExampleSheet);
-  }
-
-  ngOnInit(): void {}
-
-  addItem(): void{
-    this.toDoList.push(
-      {
-    message: this.message,
-    time: Date.now()
-
+  ngOnInit(): void {
+    this.ds.getItems().subscribe(
+      response => {
+        this.items = response as Item[];
+      },
+      err => {
+        console.log(err);
+        this.error = true;
       }
-
     );
-    this.message="";
-}
-
-  remove(idx):void{
-    this.toDoList.splice(idx,1);
   }
-}
 
-@Component({
-  selector: 'bottom-sheet-overview-example-sheet',
-  templateUrl: 'bottom-sheet-overview-example-sheet.html',
-})
-export class BottomSheetOverviewExampleSheet {
-  constructor(private _bottomSheetRef:
-  MatBottomSheetRef<BottomSheetOverviewExampleSheet>) {}
-
-  openLink(event: MouseEvent): void {
-    this._bottomSheetRef.dismiss();
-    event.preventDefault();
-  }
 }
