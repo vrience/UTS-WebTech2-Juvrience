@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Item } from '../item';
 import { DataService } from '../data.service';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import { MySheetComponent } from '../my-sheet/my-sheet.component';
 
 @Component({
   selector: 'app-first',
@@ -15,7 +16,7 @@ export class FirstComponent implements OnInit {
                     
   constructor(
     private ds: DataService,
-    private _bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet
   ) {}
   
   ngOnInit(): void {
@@ -29,9 +30,9 @@ export class FirstComponent implements OnInit {
       }
     );
   }
-  // openBottomSheet(): void {
-  //   this._bottomSheet.open(BottomSheetOverviewExampleSheet);
-  // }
+  openBottomSheet(): void {
+    this.bottomSheet.open(MySheetComponent);
+  }
 }
 // @Component({
 //   selector: 'bottom-sheet-overview-example-sheet',

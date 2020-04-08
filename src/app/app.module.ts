@@ -47,6 +47,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ShellComponent } from './shell/shell.component';
+import { MySheetComponent } from './my-sheet/my-sheet.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ShellComponent } from './shell/shell.component';
     Page404Component,
     FormToDoListComponent,
     ShellComponent,
+    MySheetComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,6 +102,7 @@ import { ShellComponent } from './shell/shell.component';
     BrowserAnimationsModule,
   ],
   providers: [],
+  entryComponents:[MySheetComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
