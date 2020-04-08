@@ -1,0 +1,17 @@
+<div>
+    <form>
+        <input type="text" id="message" name="message" placeholder="type here..." [(ngModel)]="message"/>
+        <button mat-raised-button (click)="addItem()">ADD</button>
+        <!-- <button mat-raised-button (click)="openBottomSheet()">ADD</button> -->
+    </form>
+</div>
+
+<div>
+    <h3>Your To Do List</h3>
+    <div *ngFor="let item of toDoList; let i = index">
+        <span class="close" (click)="remove(i)"></span>
+        <span (click)=remove(i)>x </span>{{item.message}}
+        <span class ="time"> {{item.time | date:'HH:mm:ss'}} </span>
+        <!--to do list item here-->
+    </div>
+   
